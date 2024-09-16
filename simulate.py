@@ -100,7 +100,7 @@ def calculate_forces_parallel(positions, masses, num_cores):
     "--trajectories-file", type=str, help="File to store trajectories into (optional)."
 )
 @click.option("--num-cores", type=int, default=1, help="Number of cores.")
-def main(num_steps, input_file, output_file, trajectories_file, num_cores, dt=0.2):
+def main(num_steps, input_file, output_file, trajectories_file, num_cores, dt=0.2, verbose=True):
     """Program that simulates the motion of planets."""
 
     positions, velocities, masses = read_data(input_file)
@@ -126,10 +126,11 @@ def main(num_steps, input_file, output_file, trajectories_file, num_cores, dt=0.
 
     if trajectories_file:
         np.savez_compressed(trajectories_file, trajectories)
-
-    print(
-        f"Simulated {num_steps} steps on {num_cores} core(s). Results written to {output_file}."
-    )
+        
+    if verbose:
+        print(
+            f"Simulated {num_steps} steps on {num_cores} core(s). Results written to {output_file}."
+        )
 
 
 if __name__ == "__main__":
