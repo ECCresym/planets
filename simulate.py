@@ -100,13 +100,11 @@ def calculate_forces_parallel(positions, masses, num_cores):
     "--trajectories-file", type=str, help="File to store trajectories into (optional)."
 )
 @click.option("--num-cores", type=int, default=1, help="Number of cores.")
-def main(num_steps, input_file, output_file, trajectories_file, num_cores):
+def main(num_steps, input_file, output_file, trajectories_file, num_cores, dt=0.2):
     """Program that simulates the motion of planets."""
 
     positions, velocities, masses = read_data(input_file)
-
-    dt = 0.2  # time step
-
+    
     if trajectories_file:
         trajectories = np.zeros((num_steps, len(positions), 3))
 
