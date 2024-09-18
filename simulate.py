@@ -37,7 +37,7 @@ def force_between_planets(position1, mass1, position2, mass2):
     force = (r / distance) * force_magnitude
 
     return force
-
+    
 def test_force_between_planets():
     position1 = np.array([0.0, 0.0, 0.0])
     mass1 = 1.0

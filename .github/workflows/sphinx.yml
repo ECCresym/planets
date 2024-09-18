@@ -1,4 +1,4 @@
-name: Test
+name: Build documentation
 
 on:
   push:
@@ -6,8 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +26,16 @@ jobs:
         post-cleanup: 'all'
         generate-run-shell: false
 
-    - name: Run tests
+    - name: Sphinx build
       run: |
-        ./test.sh
-        pytest simulate.py
+        sphinx-build doc _build
       shell: bash -el {0}
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      with:
+        publish_branch: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: _build/
+        force_orphan: true
