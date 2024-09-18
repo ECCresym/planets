@@ -1,8 +1,30 @@
 name: planets
 channels:
   - conda-forge
+  - bioconda
 dependencies:
-  - python=3.12
-  - numpy
+  - python >= 3.10
+  - black
   - click
+  - flit
+  - ipywidgets
+  - isort
+  - jupyterlab
+  - jupyterlab_code_formatter
+  - jupyterlab-git
   - matplotlib
+  - myst-parser
+  - nbdime
+  - numpy
+  - pandas
+  - pytest
+  - pytest-cov
+  - scalene
+  - seaborn
+  - snakemake-minimal
+  - sphinx
+  - sphinx-autoapi
+  - sphinx-autobuild
+  - sphinx_rtd_theme >= 2.0
+  - vulture
+  - scikit-image
